@@ -10,13 +10,26 @@
 	<title>Crime Report System</title>
 </head>
 <body>
-	<nav>
-		<ul>
-			<li><a href="#"></a> </li>
-		</ul>
-	</nav>
+	<div class="header">
+		<h4>Mandera Crime Reporting System</h4>
+	</div>
+	<div class="container">
+		<nav>
+			<ul class="float-right">
+				<li><a href="#">Home</a> </li>
+				<li><a href="#">Issues</a> </li>
+				<li><a href="#">Logs</a> </li>
+				<li><a href="#">About</a> </li>
+			</ul>
 
-
-	{% block content %}{% endblock content%}
+			<!-- Authentication -->
+			<ul class="float-left">
+				<li><a href="#">Profile</a> </li>
+				<li><a href="#">Login</a> </li>
+				<li><a href="#">Register</a> </li>
+			</ul>
+		</nav>
+	</div>
+	<!-- {% block content %}{% endblock content%} -->
 </body>
 </html>
