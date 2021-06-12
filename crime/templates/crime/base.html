@@ -13,9 +13,8 @@
 	<div class="header">
 		<h4>Mandera Crime Reporting System</h4>
 	</div>
-	<div class="container">
-		<nav>
-			<ul class="float-right">
+		<nav class="navbar">
+			<ul>
 				<li><a href="#">Home</a> </li>
 				<li><a href="#">Issues</a> </li>
 				<li><a href="#">Logs</a> </li>
@@ -23,14 +22,16 @@
 			</ul>
 
 			<!-- Authentication -->
-			<ul class="float-left">
+			<ul>
 				<li><a href="#">Profile</a> </li>
 				<li><a href="#">Login</a> </li>
 				<li><a href="#">Register</a> </li>
 			</ul>
 		</nav>
+	<div class="content">
+		{% block content %}{% endblock content%}
 	</div>
-	<!-- {% block content %}{% endblock content%} -->
+
 
 
 	<footer>
@@ -38,5 +39,9 @@
 			<h5>Copyright &copy; 2021. All Rights Reserved</h5>
 		</div>
 	</footer>
+
+	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 </body>
 </html>
