@@ -86,3 +86,31 @@ nav ul li a {
   height: 200px;
   margin-top: 10px;
 }
+
+/* Body Content */
+.log {
+  background-color: #eeeeee;
+  border-color: #20b2aa;
+  font-size: 15px;
+  border-radius: 25px;
+  border-width: 0.05em;
+  width: 100%;
+}
+
+.top-log {
+  display: flex;
+  justify-content: space-between;
+}
+
+.top-log {
+  margin: 15px;
+}
+
+.bottom-log {
+  display: flex;
+  justify-content: space-between;
+}
+
+.bottom-log {
+  margin: 15px;
+}

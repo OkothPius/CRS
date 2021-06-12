@@ -1,0 +1,20 @@
+{% extends 'crime/base.html' %}
+
+{% block content %}
+  {% for log in logs %}
+    <div class="log">
+      <div class="top-log">
+        <h3>{{log.case}}</h3>
+        <p>{{log.date_posted}}</p>
+      </div>
+
+      <h5>{{log.details }}</h5>
+
+      <div class="bottom-log">
+        <p>{{log.author}}</p>
+        <p>{{log.location}}</p>
+      </div>
+    </div>
+    <hr>
+  {% endfor %}
+{% endblock content %}
