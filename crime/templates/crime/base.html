@@ -6,61 +6,17 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet">
-	<link rel="stylesheet" href="{% static 'css/style.css' %}">
+	<link rel="stylesheet" href="{% static 'css/master.css' %}">
 	<title>Crime Report System</title>
 </head>
-<body class="bg-gray-200">
-	<!-- <nav class="p-6 bg-gray-500 flex justify-between mb-6">
-		<ul class="flex items-center">
-			<li>
-				<a href="#" class="p-3">Home</a>
-			</li>
-			<li>
-				<a href="#" class="p-3">Cases</a>
-			</li>
-			<li>
-				<a href="#" class="p-3">Logs</a>
-			</li>
-			<li>
-				<a href="#" class="p-3">About</a>
-			</li>
+<body>
+	<nav>
+		<ul>
+			<li><a href="#"></a> </li>
 		</ul>
-
-		<ul class="flex items-center">
-			<li>
-				<a href="#" class="p-3">Login</a>
-			</li>
-			<li>
-				<a href="#" class="p-3">SignUp</a>
-			</li>
-		</ul>
-	</nav> -->
-	<nav class="flex-items-center justify-between flex-wrap bg-gray-500 p-6">
-		<div class="flex items-center flex-shrink-0 text-white mr-6">
-			<span class="font-semibold text-md tracking-tight">Mandera CRS</span>
-		</div>
-
-		<div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
-			<div class="text-sm lg:flex-grow">
-				<a href="#" class="block mt-4 lg:inline-block lg:mt-0 text-gray-200 hover:text-white mr-4">
-					Cases
-				</a>
-				<a href="#" class="block mt-4 lg:inline-block lg:mt-0 text-gray-200 hover:text-white mr-4">
-					Logs
-				</a>
-				<a href="#" class="block mt-4 lg:inline-block lg:mt-0 text-gray-200 hover:text-white">
-					Cases
-				</a>
-			</div>
-			<div class="mr-2">
-				<a href="#" class="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-gray-500 hover:bg-white mt-4 lg:mt-0">Login</a>
-			</div>
-
-			<div class="mr-2">
-				<a href="#" class="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-gray-500 hover:bg-white mt-4 lg:mt-0">Register</a>
-			</div>
-		</div>
 	</nav>
+
+
 	{% block content %}{% endblock content%}
 </body>
 </html>
