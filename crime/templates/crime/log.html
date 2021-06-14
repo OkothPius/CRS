@@ -2,19 +2,19 @@
 
 {% block content %}
   {% for log in logs %}
-    <div class="log">
-      <div class="top-log">
-        <h3>{{log.case}}</h3>
-        <p>{{log.date_posted}}</p>
-      </div>
-
-      <h5>{{log.details }}</h5>
-
-      <div class="bottom-log">
-        <p>{{log.author}}</p>
+  <article class="media content-section">
+    <div class="top-log">
+      <h3>{{log.case}}</h3>
+      <small class="text-muted">{{log.date_posted | date:"F d, Y"}}</small>
+    </div>
+    <p class="article-content">{{log.details}}</p>
+    <img class="rounded-circle article-img" src="{{ log.author.profile.image.url}}" alt="avatar">
+    <div class="media-body">
+      <div class="article-metadata">
+        <p><a class="mr-2" href="#">{{log.author}}</a></p>
         <p>{{log.location}}</p>
       </div>
     </div>
-    <!-- <hr> -->
+  </article>
   {% endfor %}
 {% endblock content %}
