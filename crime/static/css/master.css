@@ -25,7 +25,7 @@ nav ul li a {
   display: block;
   margin-right: 5px;
   font-size: 17px;
-  color: #333333;
+  color: #ffffff;
   border: solid;
   border-color: #4ca3dd;
   border-radius: 30px;
@@ -115,4 +115,43 @@ nav ul li a {
 
 .bottom-log {
   margin: 15px;
+}
+
+/* Article */
+.content-section {
+  background: #ffffff;
+  padding: 10px 20px;
+  border: 1px solid #dddddd;
+  border-radius: 3px;
+  margin-bottom: 20px;
+}
+
+.article-content {
+  white-space: pre-line;
+}
+
+.article-metadata {
+  display: flex;
+  justify-content: space-between;
+}
+
+.article-metadata a:hover {
+  color: #333;
+  text-decoration: none;
+}
+
+.article-svg {
+  width: 25px;
+  height: 25px;
+  vertical-align: middle;
+}
+
+.article-img {
+  height: 65px;
+  width: 65px;
+  margin-right: 16px;
+}
+
+article .img {
+
 }
