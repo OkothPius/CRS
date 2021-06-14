@@ -15,7 +15,7 @@
 	</div>
 		<nav class="navbar">
 			<ul>
-				<li><a href="#">Home</a> </li>
+				<li><a href="{% url 'home'%}">Home</a> </li>
 				<li><a href="#">Issues</a> </li>
 				<li><a href="#">Logs</a> </li>
 				<li><a href="#">About</a> </li>
@@ -23,13 +23,47 @@
 
 			<!-- Authentication -->
 			<ul class="auth">
-				<li><a href="#">Profile</a> </li>
-				<li><a href="#">Login</a> </li>
-				<li><a href="#">Register</a> </li>
+				{% if user.is_authenticated %}
+					<li><a href="#">Create an Issue</a> </li>
+					<li><a href="{% url 'profile'%}">Profile</a> </li>
+					<li><a href="{% url 'logout'%}">Logout</a> </li>
+				{% else %}
+					<li><a href="{% url 'login'%}">Login</a> </li>
+					<li><a href="{% url 'register'%}">Register</a> </li>
+				{% endif%}
 			</ul>
 		</nav>
-		{% block content %}{% endblock content%}
-		
+		<main role="main" class="container">
+			<div class="row">
+				<div class="col-md-8">
+					{% if messages %}
+            {% for message in messages %}
+              <div class="alert alert-{{ message.tags }}">
+                {{message}}
+              </div>
+            {% endfor %}
+          {% endif %}
+					{% block content %}{% endblock content%}
+				</div>
+				<div class="col-md-4">
+          <div class="content-section">
+            <h3>CRS Sidebar</h3>
+            <p class="text-muted">To Know More About the System.
+              <ul class="list-group">
+                <li class="list-group-item list-group-item-light">Dashboard</li>
+                <li class="list-group-item list-group-item-light">Profile</li>
+                <li class="list-group-item list-group-item-light">Alerts</li>
+                <li class="list-group-item list-group-item-light">Police Posts</li>
+								<li class="list-group-item list-group-item-light">Track</li>
+								<li class="list-group-item list-group-item-light">About</li>
+              </ul>
+            </p>
+          </div>
+        </div>
+			</div>
+		</main>
+
+
 	<footer>
 		<div class="footer">
 		  <h5>Copyright &copy; 2021. All Rights Reserved</h5>
