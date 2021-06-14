@@ -89,12 +89,14 @@ nav ul li a {
 
 /* Body Content */
 .log {
-  background-color: #eeeeee;
-  border-color: #20b2aa;
+  background: #ffffff;
+  /* background-color: #eeeeee; */
+  border: 1px solid #dddddd;
   font-size: 15px;
-  border-radius: 25px;
-  border-width: 0.05em;
-  width: 100%;
+  border-radius: 3px;
+  margin-bottom: 20px;
+  /* border-width: 0.05em; */
+  /* width: 100%; */
 }
 
 .top-log {
