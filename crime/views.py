@@ -30,7 +30,7 @@ class PostListView(ListView):
 
 class PostCreateView(LoginRequiredMixin, CreateView):
     model = Log
-    fields = ['case', 'detail', 'location']
+    fields = ['case', 'details', 'location']
 
     #Uses the current user as the author of posts created
     def form_valid(self, form):
