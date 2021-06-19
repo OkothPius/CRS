@@ -8,6 +8,7 @@ body {
 }
 .navbar {
   background-color: #407294;
+  width: 100%;
 }
 nav ul {
   margin: 0px;
