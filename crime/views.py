@@ -19,6 +19,13 @@ def log(request):
 	}
 	return render(request, 'crime/log.html', context)
 
+def issue(request):
+	context = {
+		'issues': Log.objects.all()
+	}
+	return render(request, 'crime/issues.html', context)
+
+
 def about(request):
  return render(request, 'crime/about.html')
 

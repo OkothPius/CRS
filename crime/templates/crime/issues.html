@@ -1,0 +1,24 @@
+{% extends 'crime/base.html'%}
+
+{% block content %}
+<div class="container">
+  <section>
+    {% for issue in issues %}
+    <div class="row">
+      <div class="col-sm-6">
+        <h3 class="py-3 mx-0" style="color: #065535;">{{ issue.case }}</h3>
+        <p>{{issue.details}}</p>
+        <a class="" style="color: #4ca3dd; float:right;" href="#"><i class="fa fa-arrow-right" aria-hidden="true"></i> Learn More</a>
+      </div>
+
+      <div class="col-sm-6">
+        <h3 class="py-3 mx-0" style="color: #065535;">{{ issue.case }}</h3>
+        <p>{{issue.details}}</p>
+        <a class="" style="color: #4ca3dd; float:right;" href="#"><i class="fa fa-arrow-right" aria-hidden="true"></i> Learn More</a>
+      </div>
+    </div>
+    {% endfor %}
+  </section>
+</div>
+
+{% endblock %}
