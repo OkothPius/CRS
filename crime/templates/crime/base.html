@@ -9,6 +9,7 @@
 	<link rel="stylesheet" href="{% static 'css/master.css' %}">
 	<title>Crime Report System</title>
 </head>
+
 <body>
 	<div class="header">
 		<h4>Mandera Crime Reporting System</h4>
@@ -18,7 +19,7 @@
 				<li><a href="{% url 'logs'%}">Home</a> </li>
 				<li><a href="#">Issues</a> </li>
 				<li><a href="#">Logs</a> </li>
-				<li><a href="#">About</a> </li>
+				<li><a href="{% url 'about'%}">About</a></li>
 			</ul>
 
 			<!-- Authentication -->
