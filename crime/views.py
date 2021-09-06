@@ -19,6 +19,9 @@ def log(request):
 	}
 	return render(request, 'crime/log.html', context)
 
+def about(request):
+ return render(request, 'crime/about.html')
+
 
 class PostListView(ListView):
     model = Log
