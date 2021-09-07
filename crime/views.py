@@ -27,25 +27,6 @@ def issue(request):
 def about(request):
  return render(request, 'crime/about.html')
 
-
-class PostListView(ListView):
-    model = Log
-    template_name = 'crime/log.html' #<app/<model>_<viewtype>.html
-    context_object_name = 'logs'
-    ordering = ['-date_posted']
-    paginate_by = 5
-
-
-class PostCreateView(LoginRequiredMixin, CreateView):
-    model = Log
-    fields = ['case', 'details', 'location']
-
-    #Uses the current user as the author of posts created
-    def form_valid(self, form):
-        form.instance.author = self.request.user
-        return super().form_valid(form)
-
-
 def pie_chart(request):
 	labels = []
 	data = []
@@ -64,7 +45,8 @@ def report_chart(request):
 	labels = []
 	data = []
 
-	queryset = Log.objects.values('type__name').annotate(type_num_reported=Sum('num_reported')).order_by('-type_num_reported')
+	queryset = Log.objects.values('type__name').annotate(type_num_reported=Sum\
+								('num_reported')).order_by('-type_num_reported')
 	for entry in queryset:
 		labels.append(entry['type__name'])
 		data.append(entry['type_num_reported'])
@@ -73,3 +55,21 @@ def report_chart(request):
 		'labels':labels,
 		'data': data,
 	})
+
+
+class PostListView(ListView):
+    model = Log
+    template_name = 'crime/log.html' #<app/<model>_<viewtype>.html
+    context_object_name = 'logs'
+    ordering = ['-date_posted']
+    paginate_by = 5
+
+
+class PostCreateView(LoginRequiredMixin, CreateView):
+    model = Log
+    fields = ['case', 'details', 'location', 'type', 'num_reported']
+
+    #Uses the current user as the author of posts created
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
