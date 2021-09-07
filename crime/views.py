@@ -1,17 +1,15 @@
 from django.shortcuts import render
-from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from django.contrib.messages.views import SuccessMessageMixin
+from django.db.models import Sum
+from django.http import JsonResponse
 from django.contrib import messages
-from django.views.generic import ListView, CreateView
-from .models import Log, Category
+from crime.models import Log, Category
 from django.contrib.auth.models import User
+from django.views.generic import ListView, CreateView
+from django.contrib.messages.views import SuccessMessageMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
 def home(request):
-	text = 'Hey There'
-	context = {
-	'context_text':text
-	}
-	return render(request, 'crime/home.html', context)
+	return render(request, 'crime/home.html')
 
 def log(request):
 	context = {
@@ -59,5 +57,19 @@ def pie_chart(request):
 
 	return render(request, 'crime/pie-chart.html', {
 		'labels': labels,
+		'data': data,
+	})
+
+def report_chart(request):
+	labels = []
+	data = []
+
+	queryset = Log.objects.values('type__name').annotate(type_num_reported=Sum('num_reported')).order_by('-type_num_reported')
+	for entry in queryset:
+		labels.append(entry['type__name'])
+		data.append(entry['type_num_reported'])
+
+	return JsonResponse(data={
+		'labels':labels,
 		'data': data,
 	})

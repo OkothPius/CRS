@@ -1,7 +1,7 @@
 {% extends 'crime/base.html'%}
 
 {% block content %}
-<div class="container" style="width: 75%;">
+<div class="container" style="width: 100%;">
     <canvas id="pie-chart"></canvas>
   </div>
 
@@ -14,9 +14,9 @@
         datasets: [{
           data: {{ data|safe }},
           backgroundColor: [
-            '#696969', '#808080', '#A9A9A9', '#C0C0C0', '#D3D3D3'
+            '#133337', '#065535', '#576675', '#003366', '#0a75ad'
           ],
-          label: 'Population'
+          label: 'Report'
         }],
         labels: {{ labels|safe }}
       },

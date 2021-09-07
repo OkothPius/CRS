@@ -1,5 +1,8 @@
 # Crime Management System
 ![display_img](images/crime.png)
+![display_img](images/pie.png)
+![display_img](images/bar.png)
+
 
 [![Python Version](https://img.shields.io/badge/python-3.8.5-brightgreen.svg)](https://python.org)
 [![Django Version](https://img.shields.io/badge/django-3.2.5-brightgreen.svg)](https://djangoproject.com)
