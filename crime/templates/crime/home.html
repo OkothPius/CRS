@@ -1,5 +1,49 @@
 {% extends 'crime/base.html' %}
 
 {% block content %}
-  <h5>{{ context_text }}</h5>
+<div class="container" style="width: 95%;">
+  <canvas id="report-chart" data-url="{% url 'report-chart' %}"></canvas>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+<script>
+
+  $(function () {
+
+    var $reportChart = $("#report-chart");
+      $.ajax({
+        url: $reportChart.data("url"),
+        success: function (data) {
+
+          var ctx = $reportChart[0].getContext("2d");
+
+          new Chart(ctx, {
+            type: 'bar',
+            data: {
+              labels: data.labels,
+              datasets: [{
+                label: 'Report',
+                backgroundColor: 'blue',
+                data: data.data
+              }]
+            },
+            options: {
+              responsive: true,
+              legend: {
+                position: 'top',
+              },
+              title: {
+                display: true,
+                text: 'Report Bar Chart'
+              }
+            }
+          });
+
+        }
+      });
+
+  });
+
+</script>
 {% endblock content %}
