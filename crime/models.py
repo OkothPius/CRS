@@ -12,7 +12,7 @@ class Category(models.Model):
         verbose_name_plural = 'Categories'
 
     def __str__(self):
-        return f'{self.type}'
+        return f'{self.name}'
 
 
 class Log(models.Model):
@@ -25,7 +25,7 @@ class Log(models.Model):
     num_reported = models.PositiveIntegerField()
 
     def __str__(self):
-        return f'{self.case}'
+        return f'{self.case} in {self.location}'
 
     # Handles redirect
     def get_absolute_url(self):
