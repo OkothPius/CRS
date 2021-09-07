@@ -3,7 +3,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib import messages
 from django.views.generic import ListView, CreateView
-from .models import Log
+from .models import Log, Category
 from django.contrib.auth.models import User
 
 def home(request):
@@ -46,3 +46,18 @@ class PostCreateView(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.author = self.request.user
         return super().form_valid(form)
+
+
+def pie_chart(request):
+	labels = []
+	data = []
+
+	queryset = Log.objects.order_by('-num_reported')[:5]
+	for log in queryset:
+		labels.append(log.case)
+		data.append(log.num_reported)
+
+	return render(request, 'crime/pie-chart.html', {
+		'labels': labels,
+		'data': data,
+	})
