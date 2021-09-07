@@ -1,7 +1,7 @@
 import pytz
 import random
 from crime.models import Category, Log
-from users.models import Profile
+from django.contrib.auth.models import User
 from datetime import datetime, timedelta
 from django.core.management.base import BaseCommand
 
@@ -24,14 +24,22 @@ class Command(BaseCommand):
         places = ['Meru', 'Lafey', 'Anio', 'El Wak', 'Bur Mayo', 'Damasa', 'Finno', 'Madera', 'Ramu', 'Takaba', 'Waragalla', 'Arabia', 'Rhamu']
 
         surname = [
-            Profile.objects.get_or_create(user='James'), Profile.objects.get_or_create(user='John'),
-            Profile.objects.get_or_create(user='Robert'), Profile.objects.get_or_create(user='Michael'),
-            Profile.objects.get_or_create(user='William'), Profile.objects.get_or_create(user='David'),
-            Profile.objects.get_or_create(user='Richard'), Profile.objects.get_or_create(user='Joseph'),
-            Profile.objects.get_or_create(user='Thomas'), Profile.objects.get_or_create(user='Charles'),
-            Profile.objects.get_or_create(user='Angeline'), Profile.objects.get_or_create(user='Milka'),
-            Profile.objects.get_or_create(user='Suleiman'), Profile.objects.get_or_create(user='Ahmed'),
-            Profile.objects.get_or_create(user='Zulpha'), Profile.objects.get_or_create(user='Khadija'),
+            User.objects.get_or_create(first_name='', last_name='', email='', password='skjsaasnxnqi', is_staff=False, is_active=True, is_superuser=False, username='James'),
+            User.objects.get_or_create(first_name='', last_name='', email='', password='skjsaasnxnqi', is_staff=False, is_active=True, is_superuser=False, username='John'),
+            User.objects.get_or_create(first_name='', last_name='', email='', password='skjsaasnxnqi', is_staff=False, is_active=True, is_superuser=False, username='Robert'),
+            User.objects.get_or_create(first_name='', last_name='', email='', password='skjsaasnxnqi', is_staff=False, is_active=True, is_superuser=False, username='Michael'),
+            User.objects.get_or_create(first_name='', last_name='', email='', password='skjsaasnxnqi', is_staff=False, is_active=True, is_superuser=False, username='William'),
+            User.objects.get_or_create(first_name='', last_name='', email='', password='skjsaasnxnqi', is_staff=False, is_active=True, is_superuser=False, username='David'),
+            User.objects.get_or_create(first_name='', last_name='', email='', password='skjsaasnxnqi', is_staff=False, is_active=True, is_superuser=False, username='Richard'),
+            User.objects.get_or_create(first_name='', last_name='', email='', password='skjsaasnxnqi', is_staff=False, is_active=True, is_superuser=False, username='Joseph'),
+            User.objects.get_or_create(first_name='', last_name='', email='', password='skjsaasnxnqi', is_staff=False, is_active=True, is_superuser=False, username='Thomas'),
+            User.objects.get_or_create(first_name='', last_name='', email='', password='skjsaasnxnqi', is_staff=False, is_active=True, is_superuser=False, username='Charles'),
+            User.objects.get_or_create(first_name='', last_name='', email='', password='skjsaasnxnqi', is_staff=False, is_active=True, is_superuser=False, username='Angeline'),
+            User.objects.get_or_create(first_name='', last_name='', email='', password='skjsaasnxnqi', is_staff=False, is_active=True, is_superuser=False, username='Milka'),
+            User.objects.get_or_create(first_name='', last_name='', email='', password='skjsaasnxnqi', is_staff=False, is_active=True, is_superuser=False, username='Suleiman'),
+            User.objects.get_or_create(first_name='', last_name='', email='', password='skjsaasnxnqi', is_staff=False, is_active=True, is_superuser=False, username='Ahmed'),
+            User.objects.get_or_create(first_name='', last_name='', email='', password='skjsaasnxnqi', is_staff=False, is_active=True, is_superuser=False, username='Zulpha'),
+            User.objects.get_or_create(first_name='', last_name='', email='', password='skjsaasnxnqi', is_staff=False, is_active=True, is_superuser=False, username='Khadija'),
         ]
 
         categories = [
@@ -47,7 +55,7 @@ class Command(BaseCommand):
                 case=random.choice(names) + ' ' + random.choice(other),
                 details=random.choice(words),
                 location=random.choice(places),
-                author=random.choice(surname),
+                author=random.choice(surname)[0],
                 type=random.choice(categories)[0],
                 num_reported=random.randint(34, 789),
             )
@@ -55,3 +63,5 @@ class Command(BaseCommand):
             log.save()
 
         self.stdout.write(self.style.SUCCESS('Successfully populated the database.'))
+
+        # python manage.py populate_db --500
