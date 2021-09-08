@@ -23,6 +23,8 @@ def issue(request):
 	}
 	return render(request, 'crime/issues.html', context)
 
+def police_post(request):
+	return render(request, 'crime/police_post.html')
 
 def about(request):
  return render(request, 'crime/about.html')
