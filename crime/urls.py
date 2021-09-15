@@ -1,11 +1,22 @@
 from django.urls import path
-from .views import PostListView, PostCreateView
+from .views import (
+        LogListView,
+        LogCreateView,
+        LogUpdateView,
+        LogDeleteView,
+        UserLogListView,
+        LogDetailView
+        ) 
 from . import views
 
 urlpatterns = [
-    path('', PostListView.as_view(), name='logs'),
+    path('', LogListView.as_view(), name='log-home'),
+    path('log/<str:username>', UserLogListView.as_view(), name='user-logs'),
     path('visuals/', views.home, name='home'),
-    path('log/new/', PostCreateView.as_view(), name='log-create'),
+    path('log/new/', LogCreateView.as_view(), name='log-create'),
+    path('log/<int:pk>/', LogDetailView.as_view(), name='log-detail'),
+    path('log/<int:pk>/update/', LogUpdateView.as_view(), name='log-update'),
+    path('log/<int:pk>/delete/', LogDeleteView.as_view(), name='log-delete'),
     path('issues/', views.issue, name='issue'),
     path('pie-chart/', views.pie_chart, name='pie-chart'),
     path('report-chart/', views.report_chart, name='report-chart'),
