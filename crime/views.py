@@ -108,8 +108,8 @@ class LogUpdateView(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixin
 
 
     def test_func(self):
-        post = self.get_object()
-        if self.request.user == post.author:
+        log = self.get_object()
+        if self.request.user == log.author:
             return True
 
 class LogDeleteView(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixin, DeleteView):
@@ -118,6 +118,6 @@ class LogDeleteView(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixin
     success_url = '/'
 
     def test_func(self):
-        post = self.get_object()
-        if self.request.user == post.author:
+        log = self.get_object()
+        if self.request.user == log.author:
             return True
