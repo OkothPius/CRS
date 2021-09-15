@@ -29,4 +29,4 @@ class Log(models.Model):
 
     # Handles redirect
     def get_absolute_url(self):
-        return reverse('logs')
+        return reverse('log-home')
