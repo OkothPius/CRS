@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Log Details</title>
+    <style type="text/css" media="screen">
+      @page {
+        size: A4;
+        margin: 1cm;
+      }
+
+      .table {
+        width: 100%;
+        max-width: 100%;
+        margin-bottom: 5px;
+        background-color: #fff;
+      }
+
+      .table th,
+      .table td {
+        padding: 5px;
+        vertical-align: top;
+        border-top: 1px solid #000;
+        text-align: center;
+      }
+
+      .table thead th {
+        vertical-align: bottom;
+        border-bottom: 2px bottom #000;
+      }
+
+      .table tbody + tbody {
+        border-top: 2px solid #000;
+      }
+
+      .table .table {
+        background-color: #fff;
+      }
+
+      .list-group {
+        display: block;
+        width: 100%;
+        list-style: none;
+        margin-top: 15px;
+        margin-bottom: 15px;
+      }
+
+      .list-group p {
+        width: 100%;
+        height: 20px;
+        line-height: 20px;
+        list-style: none;
+        font-size: 1.1em;
+      }
+
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="card">
+        <div class="card-header">
+          <h3>Logs available for the - {{ today | date:"d/m/y" }} are:</h3>
+        </div>
+
+        <div class="list-group">
+          <p>Name: {{ object.title }}</p>
+        </div>
+
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Case</th>
+              <th>details</th>
+              <th>Author</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            {% for crime in crimes %}
+              <tr>
+                <td>{{ crime.case }}</td>
+                <td>{{ crime.details }}</td>
+                <td>{{ crime.author }}</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>

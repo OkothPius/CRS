@@ -1,6 +1,9 @@
 from django.shortcuts import render, get_object_or_404
 from django.db.models import Sum
 from django.http import JsonResponse
+from django.utils import timezone
+from django.views import generic
+from .render import Render
 from django.contrib import messages
 from crime.models import Log, Category
 from django.contrib.auth.models import User
@@ -121,3 +124,17 @@ class LogDeleteView(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixin
         log = self.get_object()
         if self.request.user == log.author:
             return True
+
+class PdfView(generic.TemplateView):
+
+    def get(self, request):
+        crimes = Log.objects.all()
+        today = timezone.now()
+
+        params = {
+            'today': today,
+            'crimes': crimes,
+            'request': request
+        }
+
+        return Render.render('crime/pdf.html', params)
