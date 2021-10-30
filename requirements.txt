@@ -11,7 +11,7 @@ python-bidi==0.4.2
 pytz==2021.1
 reportlab==3.6.2
 six==1.16.0
-sqlparse==0.4.1
+sqlparse==0.4.2
 webencodings==0.5.1
 xhtml2pdf==0.2.5
 sqlparse==0.4.2
