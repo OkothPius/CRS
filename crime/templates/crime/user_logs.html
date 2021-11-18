@@ -2,19 +2,47 @@
 
   {% block content%}
   <h1 class="mb-3">Post by {{ view.kwargs.username }} ({{ page_obj.paginator.count }})</h1>
-    {% for log in logs %}
-      <article class="media content-section">
-        <img class="rounded-circle article-img" src="{{ log.author.profile.image.url }}" alt="avatar">
-        <div class="media-body">
-          <div class="article-metadata">
-            <a class="mr-2" href="{% url 'user-logs' log.author.username %}">{{ log.author }}</a>
-            <small class="text-muted">{{log.date_posted | date:"F d, Y"}}</small>
-          </div>
-          <h2><a class="article-title" href="{% url 'log-detail' log.id %}">{{ log.case }}</a></h2>
-          <p class="article-content">{{ log.details }}</p>
-        </div>
-      </article>
-    {% endfor %}
+
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">Sr.No</th>
+          <th scope="col">Logged By</th>
+          <th scope="col">Case Title</th>
+          <th scope="col">Logged Date</th>
+          <th scope="col">Case Type</th>
+          <th scope="col">Case Status</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      {% for log in logs %}
+      <tbody>
+        <tr>
+          <th scope="row">{{page_obj.start_index|add:forloop.counter0}}</th>
+          <th>{{ log.author }}</th>
+          <td>{{log.case}}</td>
+          <td>{{log.date_posted | date:"F d, Y"}}</td>
+          <td>{{log.type}}</td>
+          <td style='color: green'>{{log.status}}</td>
+          <td>
+            {% if log.author == user %}
+              <div class="">
+                <a class="btn btn-secondary btn-sm mt-1 mb-1"href="{% url 'log-update' log.id %}">Update</a>
+                <a class="btn btn-danger btn-sm mt-1 mb-1"href="{% url 'log-delete' log.id %}">Delete</a>
+              </div>
+
+            {% else %}
+              <div class="">
+                Permission Denied
+              </div>
+            {% endif %}
+
+          </td>
+        </tr>
+      </tbody>
+      {% endfor %}
+    </table>
+
     {% if is_paginated %}
 
       {% if page_obj.has_previous %}
