@@ -64,4 +64,4 @@ class Command(BaseCommand):
 
         self.stdout.write(self.style.SUCCESS('Successfully populated the database.'))
 
-        # python manage.py populate_db --500
+        # python manage.py populate_db --report 500
