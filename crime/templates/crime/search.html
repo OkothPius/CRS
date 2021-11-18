@@ -1,0 +1,18 @@
+{% extends 'crime/base.html' %}
+
+{% block content %}
+<div class="container">
+    <h2 class="md text-center my-2">Search Results for {{request.GET.keyword}}</h2>
+</div>
+<hr>
+
+<div class="grid grid-4">
+  {% for log in logs %}
+        <div class="card text-center">
+          <h2 class="m-2">{{log.case}}</h2>
+        </div>
+  {% empty %}
+    <h2 class="text-center">No Cases yet!</h2>
+  {% endfor %}
+</div>
+{% endblock %}

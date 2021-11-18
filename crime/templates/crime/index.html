@@ -1,6 +1,21 @@
 {% extends 'crime/base.html' %}
 
 {% block content %}
+
+<!-- Search Button -->
+<div class="container mt-5">
+  <div class="row search d-flex justify-content-center align-items-center">
+
+        <form class="col-md-8" action="{% url 'search' %}" method="GET">
+          <div class="search"> <i class="fa fa-search"></i>
+            <input type="text" class="form-control" placeholder="Search For a Case" required>
+            <button class="btn btn-primary">Search</button>
+            <!-- <input type="submit" name="" value="Search"> -->
+          </div>
+        </form>
+  </div>
+</div>
+
   {% for log in logs %}
   <article class="media content-section">
     <div class="top-log">

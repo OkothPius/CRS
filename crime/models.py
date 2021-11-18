@@ -16,6 +16,16 @@ class Category(models.Model):
 
 
 class Log(models.Model):
+
+    STATUS_CHOICES = [
+        ('pending', 'PENDING'),
+        ('assigned', 'ASSIGNED OFFICER'),
+        ('not assigned', 'NOT ASSIGNED OFFICER'),
+        ('arrested', 'ARRESTED'),
+        ('arrained to court', 'SERVED'),
+        ('matter concluded', 'INCARCERATED')
+    ]
+    
     case = models.CharField(max_length=100)
     details = models.TextField()
     location = models.CharField(max_length=50)
@@ -23,6 +33,8 @@ class Log(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     type = models.ForeignKey(Category, on_delete=models.CASCADE)
     num_reported = models.PositiveIntegerField()
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES)
+    attach_file = models.FileField(upload_to='attachments')
 
     def __str__(self):
         return f'{self.case} in {self.location}'

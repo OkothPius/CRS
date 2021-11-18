@@ -3,6 +3,7 @@ from django.db.models import Sum
 from django.http import JsonResponse
 from django.utils import timezone
 from django.views import generic
+from django.db.models import Q
 from .render import Render
 from django.contrib import messages
 from crime.models import Log, Category
@@ -73,14 +74,14 @@ class LogListView(ListView):
     template_name = 'crime/index.html' #<app/<model>_<viewtype>.html
     context_object_name = 'logs'
     ordering = ['-date_posted']
-    paginate_by = 5
+    paginate_by = 20
 
 class UserLogListView(ListView):
     model = Log
     template_name = 'crime/user_logs.html' #<app/<model>_<viewtype>.html
     context_object_name = 'logs'
     ordering = ['-date_posted']
-    paginate_by = 5
+    paginate_by = 10
 
     def get_queryset(self):
         user = get_object_or_404(User, username=self.kwargs.get('username'))
@@ -91,7 +92,7 @@ class LogDetailView(DetailView):
 
 class LogCreateView(LoginRequiredMixin, CreateView):
     model = Log
-    fields = ['case', 'details', 'location', 'type', 'num_reported']
+    fields = ['case', 'details', 'location', 'type', 'num_reported', 'attach_file']
 
     #Uses the current user as the author of posts created
     def form_valid(self, form):
@@ -102,7 +103,7 @@ class LogCreateView(LoginRequiredMixin, CreateView):
 class LogUpdateView(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixin, UpdateView):
     success_message ='Your Post have been Updated!'
     model = Log
-    fields = ['case', 'details', 'location', 'type', 'num_reported']
+    fields = ['case', 'details', 'location', 'type', 'num_reported', 'attach_file']
 
     #Uses the current user as the author of posts created
     def form_valid(self,form):
@@ -138,3 +139,27 @@ class PdfView(generic.TemplateView):
         }
 
         return Render.render('crime/pdf.html', params)
+
+#Search view
+class SearchView(generic.TemplateView):
+    template_name = 'crime/search.html'
+    models = Log
+
+    def get_queryset(self):
+        query = self.request.GET.get('query')
+        if query:
+           queryset = Log.objects.filter(case__icontains=query)
+        else:
+            queryset = Log.objects.all()
+        return queryset
+
+    #
+    #     return Log.objects.all()
+    #
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     kw = self.request.GET.get('keyword')
+    #     logs = Log.objects.filter(Q(location__icontains=kw) | Q(author__icontains=kw))
+    #     print('logs')
+    #     context['logs'] = logs
+    #     return context
