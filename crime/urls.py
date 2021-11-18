@@ -6,7 +6,8 @@ from .views import (
         LogDeleteView,
         UserLogListView,
         LogDetailView,
-        PdfView
+        PdfView,
+        SearchView
         )
 from . import views
 
@@ -24,4 +25,5 @@ urlpatterns = [
     path('police-post/', views.police_post, name='police-post'),
     path('about/', views.about, name='about'),
     path('download/', PdfView.as_view(), name='download'),
+    path('search/', SearchView.as_view(), name='search'),
 ]
