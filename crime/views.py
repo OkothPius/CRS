@@ -17,7 +17,7 @@ from django.views.generic import (
                     DetailView,
                     DeleteView
                     )
-
+from .filters import LogFilter
 
 def home(request):
     return render(request, 'crime/home.html')
@@ -78,14 +78,38 @@ class LogListView(ListView):
 
 class UserLogListView(ListView):
     model = Log
+    # my_filter = LogFilter()
     template_name = 'crime/user_logs.html' #<app/<model>_<viewtype>.html
     context_object_name = 'logs'
     ordering = ['-date_posted']
     paginate_by = 10
 
     def get_queryset(self):
-        user = get_object_or_404(User, username=self.kwargs.get('username'))
-        return Log.objects.filter(author=user).order_by('-date_posted')
+        queryset = super().get_queryset()
+        myFilter = LogFilter(self.request.GET, queryset)
+        return myFilter.qs
+
+    # def get_queryset(self):
+    #     user = get_object_or_404(User, username=self.kwargs.get('username'))
+    #     return Log.objects.filter(author=user).order_by('-date_posted')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        queryset = self.get_queryset()
+        myFilter = LogFilter(self.request.GET, queryset)
+        context["myFilter"] = myFilter
+        return context
+
+    # def get(self, request, *args, **kwargs):
+    #     self.object_list = self.get_queryset()
+    #     context = self.get_context_data(**kwargs)
+    #     logs = Log.objects.all()
+    #     myFilter = LogFilter(request.GET, queryset=logs)
+    #     logs = myFilter.qs
+    #
+    #     context['myFilter'] = myFilter
+    #     return render(request, self.template_name, context)
+        # return context
 
 class LogDetailView(DetailView):
     model = Log
