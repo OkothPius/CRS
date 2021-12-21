@@ -18,6 +18,7 @@ from django.views.generic import (
                     DeleteView
                     )
 from .filters import LogFilter
+from django.core import paginator
 
 def home(request):
     return render(request, 'crime/home.html')
@@ -44,7 +45,7 @@ def pie_chart(request):
     labels = []
     data = []
 
-    queryset = Log.objects.order_by('-num_reported')[:5]
+    queryset = Log.objects.order_by('-num_reported')[:10]
     for log in queryset:
         labels.append(log.case)
         data.append(log.num_reported)
@@ -98,18 +99,14 @@ class UserLogListView(ListView):
         queryset = self.get_queryset()
         myFilter = LogFilter(self.request.GET, queryset)
         context["myFilter"] = myFilter
+
+        # paginated_myFilter = paginator(myFilter.qs, 2)
+        # page_number = self.GET.get('page')
+        # page_obj = paginated_myFilter.get_page(page_number)
+        # context['page_obj'] = page_obj
+
         return context
 
-    # def get(self, request, *args, **kwargs):
-    #     self.object_list = self.get_queryset()
-    #     context = self.get_context_data(**kwargs)
-    #     logs = Log.objects.all()
-    #     myFilter = LogFilter(request.GET, queryset=logs)
-    #     logs = myFilter.qs
-    #
-    #     context['myFilter'] = myFilter
-    #     return render(request, self.template_name, context)
-        # return context
 
 class LogDetailView(DetailView):
     model = Log
@@ -176,14 +173,3 @@ class SearchView(generic.TemplateView):
         else:
             queryset = Log.objects.all()
         return queryset
-
-    #
-    #     return Log.objects.all()
-    #
-    # def get_context_data(self, **kwargs):
-    #     context = super().get_context_data(**kwargs)
-    #     kw = self.request.GET.get('keyword')
-    #     logs = Log.objects.filter(Q(location__icontains=kw) | Q(author__icontains=kw))
-    #     print('logs')
-    #     context['logs'] = logs
-    #     return context
